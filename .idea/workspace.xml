@@ -4,9 +4,10 @@
     <list default="true" id="291b2809-bc0c-400f-8cff-5dd9d3488052" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WQPS_backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/WQPS_backend/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/water/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/water/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/water/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/water/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/weather/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/weather/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/weather/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/weather/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +85,9 @@
       <option name="presentableId" value="Default" />
       <updated>1584500791147</updated>
       <workItem from="1584500802674" duration="1002000" />
-      <workItem from="1584511139439" duration="28436000" />
+      <workItem from="1584511139439" duration="31167000" />
+      <workItem from="1546301052448" duration="248000" />
+      <workItem from="1546312428695" duration="1721000" />
     </task>
     <servers />
   </component>
@@ -96,9 +99,9 @@
       <screen x="0" y="23" width="1440" height="812" />
     </state>
     <state x="229" y="67" key="SettingsEditor/0.23.1440.812@0.23.1440.812" timestamp="1584512381232" />
-    <state x="399" y="261" key="com.intellij.ide.util.TipDialog" timestamp="1584511140907">
+    <state x="399" y="261" key="com.intellij.ide.util.TipDialog" timestamp="1546312472973">
       <screen x="0" y="23" width="1440" height="812" />
     </state>
-    <state x="399" y="261" key="com.intellij.ide.util.TipDialog/0.23.1440.812@0.23.1440.812" timestamp="1584511140907" />
+    <state x="399" y="261" key="com.intellij.ide.util.TipDialog/0.23.1440.812@0.23.1440.812" timestamp="1546312472973" />
   </component>
 </project>

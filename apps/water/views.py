@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 from . import models
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
+import itertools
 
 # Create your views here.
 
@@ -65,6 +66,7 @@ def get_a_data(request, data_id):
                 "data": None
             }
         return JsonResponse(res)
+
 
 # 修改水质数据
 def edit_data(request):
@@ -145,3 +147,27 @@ def add_data(request):
         }
         return JsonResponse(res)
 
+
+# 绘制数据趋势
+def plot_data(request):
+    if request.method == 'GET':
+        param = request.GET.get('param')
+        interval = request.GET.get('interval')
+        print("param:::", param)
+        print("interval:::", interval)
+        if interval == "all":
+            data = models.WaterData.objects.all()
+        else:
+            data = models.WaterData.objects.filter(time__year=interval)
+        # print(list(data.values_list("PH")))
+        # out = list(itertools.chain(*tuple))
+        # print(list(itertools.chain(*data.values_list("PH"))))
+        res_data = []
+        res_data.append(list(itertools.chain(*data.values_list("time"))))
+        res_data.append(list(itertools.chain(*data.values_list(param))))
+        res = {
+            "err": 0,
+            "info": "绘图数据",
+            "data": res_data
+        }
+        return JsonResponse(res)

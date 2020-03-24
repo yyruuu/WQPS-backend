@@ -6,5 +6,5 @@ urlpatterns = [
     path('edit', views.edit_data, name="修改水质数据"),
     path('delete/<data_id>', views.delete_data, name="删除水质数据"),
     path('add', views.add_data, name="新增水质数据"),
-
+    path('plot', views.plot_data, name="绘制数据趋势")
 ]
