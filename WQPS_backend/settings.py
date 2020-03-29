@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'users',
     'water',
     'weather',
-    'corsheaders'
+    'corsheaders',
+    'predict'
 ]
 
 MIDDLEWARE = [

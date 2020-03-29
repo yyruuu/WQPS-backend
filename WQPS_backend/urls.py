@@ -22,4 +22,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('water/', include('water.urls')),
     path('weather/', include('weather.urls')),
+    path('model/', include('predict.urls')),
 ]
