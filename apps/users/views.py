@@ -1,5 +1,10 @@
 from django.shortcuts import render
-import json
+# import json
+try:
+    import json
+except ImportError:
+    import simplejson as json
+
 from . import models
 from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
