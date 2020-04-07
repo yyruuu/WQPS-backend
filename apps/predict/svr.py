@@ -4,17 +4,17 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.externals import joblib
 
 
-def train_and_predict(X_train, y_train, X_test):
+def train(train_X, train_y, test_X, param):
+    str = "svr_"+param+'.m'
     try:
-        svr_model = joblib.load("svr_model.m")
+        svr_model = joblib.load(str)
         print("训练好的", svr_model)
     except:
         svr_model = SVR(kernel='rbf')
-        svr_model.fit(X_train, y_train)
-        joblib.dump(svr_model, "svr_model.m")
+        svr_model.fit(train_X, train_y)
+        joblib.dump(svr_model, str)
 
-    predict = svr_model.predict(X_test)
-    return predict
+    return svr_model
 
 
 
