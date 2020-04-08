@@ -10,7 +10,7 @@ from . import svr
 from . import bp
 from . import lstm
 # import pandas as pd
-
+from sklearn.metrics import mean_absolute_error
 def train(request):
     if request.method == 'GET':
         # 获取需要训练的参数
@@ -70,6 +70,7 @@ def train(request):
         # 将预测结果返回
         time = data[:,0]
         time = time[split_index:]
+        mae = mean_absolute_error(test_y, test_predict)
         res = {
             "err": 0,
             "info": "返回训练结果",
@@ -80,7 +81,8 @@ def train(request):
                 "train_time": list(data[:,0][-4:]),
                 "train_data": list(true_last),
                 # "train_data": list(test_X[:, 2][-4:]),
-                "last_predict": list(last_predict)
+                "last_predict": list(last_predict),
+                "mae": mae
             }
         }
         return JsonResponse(res)
