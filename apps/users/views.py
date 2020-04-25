@@ -20,20 +20,26 @@ def create_user(request):
         username = data['username']
         password = data['password']
         email = data['email']
-        new_user = models.User()
-        new_user.username = username
-        new_user.password = password
-        new_user.email = email
-        new_user.save()
-        res = {
-            'err': 0,
-            'info': "注册成功！",
-            'data': {
-                'id': new_user.id,
-                'username': new_user.username,
-                'email': new_user.email
+        try:
+            new_user = models.User()
+            new_user.username = username
+            new_user.password = password
+            new_user.email = email
+            new_user.save()
+            res = {
+                'err': 0,
+                'info': "注册成功！",
+                'data': {
+                    'id': new_user.id,
+                    'username': new_user.username,
+                    'email': new_user.email
+                }
             }
-        }
+        except:
+            res = {
+                'err': 1,
+                'info': "注册失败！"
+            }
         return JsonResponse(res)
 
 
