@@ -3,10 +3,10 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from keras.models import load_model
 
-def train(train_X, train_y, test_X, test_y, param):
-    str = "lstm_"+param+'.h5'
+def train(train_X, train_y, test_X, test_y, param, n_weeks):
+    string = "lstm_"+param+str(n_weeks)+'.h5'
     try:
-        model = load_model(str)
+        model = load_model(string)
         print("训练好的LSTM", model)
     except:
         model = Sequential()
@@ -17,5 +17,5 @@ def train(train_X, train_y, test_X, test_y, param):
         model.add(Dense(1))
         model.compile(loss='mse', optimizer='adam')
         history = model.fit(train_X, train_y, verbose=1, epochs=100, validation_data=(test_X, test_y))
-        model.save(str)
+        model.save(string)
     return model

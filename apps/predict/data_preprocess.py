@@ -148,7 +148,7 @@ def get_last_predict(test_X, model, sel_model, n_weeks, n_features):
     # last = test_X[-4:, :]
     if sel_model == "LSTM":
         test_X = test_X.reshape((test_X.shape[0], n_weeks, n_features))
-    last = test_X[-4:, :]
+    last = test_X[-n_weeks:, :]
     last_predict = model.predict(last)
     # inverse
     # if sel_model == "LSTM":

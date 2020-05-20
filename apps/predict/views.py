@@ -18,13 +18,13 @@ def train(request):
         sel_model = request.GET.get('model')
         # sel_model = "LSTM"
         # 后期可以选择需要预测未来多久的数据
-        split_index = 183
-        print("parammmm", sel_model)
         # 先加载数据
         data = data_preprocess.get_data()
         # 用一个月（4周）的数据预测一周数据，12个特征值
-        n_weeks = 4
+        n_weeks = request.GET.get('step')
+        n_weeks = int(n_weeks)
         n_features = 12
+        split_index = 187-n_weeks
         # 构造一个4->1的监督学习型数据
         reframed = data_preprocess.series_to_supervised(data[:, 1:], n_weeks, 1, True)
         X = reframed.values[:, :n_weeks*n_features]
@@ -33,15 +33,15 @@ def train(request):
         scaler, X = data_preprocess.standard(X)
         # 将数据集分为训练集和测试集
         train_X, test_X, train_y, test_y = data_preprocess.train_test_split(X, y ,split_index, param, n_weeks, n_features)
-
+        print(train_X.shape, train_y.shape, test_X.shape, test_y.shape)
         # 如果是LSTM，需要将数据转换为3D
         if sel_model == "LSTM":
             train_X, test_X = data_preprocess.trans_3d(train_X, test_X, n_weeks, n_features)
-            model = lstm.train(train_X, train_y, test_X, test_y, param)
+            model = lstm.train(train_X, train_y, test_X, test_y, param, n_weeks)
         elif sel_model == "SVR":
-            model = svr.train(train_X, train_y, test_X, param)
+            model = svr.train(train_X, train_y, test_X, param, n_weeks)
         elif sel_model == "BP":
-            model = bp.train(train_X, train_y, test_X, param)
+            model = bp.train(train_X, train_y, test_X, param, n_weeks)
 
         test_predict = model.predict(test_X)
 
@@ -53,6 +53,7 @@ def train(request):
         # inv_test_y = data_preprocess.inverse_trans(test_y, test_X, scaler, n_weeks, n_features)
         # 使用最后四周的数据预测下四周
         last_predict = data_preprocess.get_last_predict(test_X, model, sel_model, n_weeks, n_features)
+        print("last_predict", last_predict)
         if sel_model == "LSTM":
             test_predict = test_predict.reshape(1, -1)[0].tolist()
             last_predict = last_predict.reshape(1, -1)[0].tolist()
@@ -68,9 +69,9 @@ def train(request):
             true_last = data[:, 4][-4:]
 
         # 将预测结果返回
-        time = data[:,0][4:]
+        time = data[:,0][n_weeks:]
         time = time[split_index:]
-        mae = mean_squared_error(test_y, test_predict)
+        mse = mean_squared_error(test_y, test_predict)
         res = {
             "err": 0,
             "info": "返回训练结果",
@@ -82,7 +83,7 @@ def train(request):
                 "train_data": list(true_last),
                 # "train_data": list(test_X[:, 2][-4:]),
                 "last_predict": list(last_predict),
-                "mae": mae
+                "mae": mse
             }
         }
         return JsonResponse(res)
